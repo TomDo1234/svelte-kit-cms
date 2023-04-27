@@ -1,0 +1,11 @@
+model User {
+  id Int @id
+  name String 
+  email String 
+}
+model Post {
+  id Int @id
+  title String 
+  content String 
+  authorId Int 
+}
