@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
-import user from './models/user.js';
-import post from './models/post.js';
+import user from './models/user';
+import post from './models/post';
 
 
 
