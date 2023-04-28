@@ -1,12 +1,13 @@
 import post from "./models/post";
 import user from "./models/user";
-const voyagerconfig = {
+
+const siriusconfig: SiriusConfig = {
     provider: "postgresql",
     url: "test",
     models: [
-        user,
-        post
+      user,
+      post
     ],
-};
-export default voyagerconfig;
-//# sourceMappingURL=voyagerconfig.js.map
+}
+
+export default siriusconfig;
