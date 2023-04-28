@@ -1,14 +1,15 @@
-export default {
+const post = {
     name: 'Post',
     fields: [
         {
             name: 'id',
             type: 'Int',
-            id: true
+            id: true,
         },
         {
             name: 'title',
             type: 'String',
+            unique: true
         },
         {
             name: 'content',
@@ -18,6 +19,15 @@ export default {
             name: 'authorId',
             type: 'Int',
         },
+        {
+            name: 'createdAt',
+            isCreatedAt: true,
+        },
+        {
+            name: 'updatedAt',
+            isUpdatedAt: true,
+        }
     ],
 };
+export default post;
 //# sourceMappingURL=post.js.map

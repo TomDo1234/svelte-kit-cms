@@ -1,0 +1,20 @@
+datasource db {
+  provider = "postgresql"
+  url = "test"
+}
+  
+model User {
+  id Int @id
+  name String
+  email String
+}
+
+model Post {
+  id Int @id
+  title String @unique
+  content String
+  authorId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
