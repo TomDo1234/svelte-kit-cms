@@ -34,7 +34,7 @@ type Model = {
     fields: Field[]
 }
 
-type VoyagerConfig = {
+type SiriusConfig = {
     provider: string,
     url: string,
     models: Model[]

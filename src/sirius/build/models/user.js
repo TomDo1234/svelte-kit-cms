@@ -1,4 +1,4 @@
-export default {
+const user = {
     name: 'User',
     fields: [
         {
@@ -16,4 +16,5 @@ export default {
         },
     ],
 };
+export default user;
 //# sourceMappingURL=user.js.map

@@ -1,22 +1,22 @@
 import { writeFileSync } from 'fs';
-import voyagerconfig from './voyagerconfig';
+import siriusconfig from './siriusconfig';
 
 
 
-function generatePrismaSchema(voyagerconfig: VoyagerConfig): string {
+function generatePrismaSchema(siriusconfig: SiriusConfig): string {
   let prismaSchema = '';
 
   prismaSchema += `datasource db {
 `;
-  prismaSchema += `  provider = "${voyagerconfig.provider}"
+  prismaSchema += `  provider = "${siriusconfig.provider}"
 `;
-  prismaSchema += `  url = "${voyagerconfig.url}"
+  prismaSchema += `  url = "${siriusconfig.url}"
 `;
   prismaSchema += `}
 
 `;
 
-  for (const model of voyagerconfig.models) {
+  for (const model of siriusconfig.models) {
     prismaSchema += `model ${model.name} {
 `;
 
@@ -33,9 +33,9 @@ function generatePrismaSchema(voyagerconfig: VoyagerConfig): string {
   return prismaSchema;
 }
 
-const prismaSchema = generatePrismaSchema(voyagerconfig);
+const prismaSchema = generatePrismaSchema(siriusconfig);
 writeFileSync('prisma/schema.prisma', prismaSchema);
 
-function generateRestApiRoutes(voyagerconfig: VoyagerConfig): void {
+function generateRestApiRoutes(siriusconfig: SiriusConfig): void {
 
 }
