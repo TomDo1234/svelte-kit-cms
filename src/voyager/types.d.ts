@@ -34,11 +34,8 @@ type Model = {
     fields: Field[]
 }
 
-type JsonSchema = {
-    models: Model[]
-}
-
 type VoyagerConfig = {
     provider: string,
-    url: string
+    url: string,
+    models: Model[]
 }

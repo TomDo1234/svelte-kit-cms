@@ -1,4 +1,4 @@
-export default {
+const user: TableConfig = {
   name: 'User',
   fields: [
     {
@@ -16,3 +16,5 @@ export default {
     },
   ],
 };
+
+export default user;

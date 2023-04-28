@@ -1,6 +1,13 @@
-const config: VoyagerConfig = {
+import post from "./models/post";
+import user from "./models/user";
+
+const voyagerconfig: VoyagerConfig = {
     provider: "postgresql",
-    url: "test"
+    url: "test",
+    models: [
+      user,
+      post
+    ],
 }
 
-export default config;
+export default voyagerconfig;

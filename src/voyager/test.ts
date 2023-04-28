@@ -1,24 +1,22 @@
 import { writeFileSync } from 'fs';
-import user from './models/user';
-import post from './models/post';
-import config from './voyagerconfig';
+import voyagerconfig from './voyagerconfig';
 
 
 
-function generatePrismaSchema(jsonSchema: JsonSchema): string {
+function generatePrismaSchema(voyagerconfig: VoyagerConfig): string {
   let prismaSchema = '';
 
   prismaSchema += `datasource db {
 `;
-  prismaSchema += `  provider = "${config.provider}"
+  prismaSchema += `  provider = "${voyagerconfig.provider}"
 `;
-  prismaSchema += `  url = "${config.url}"
+  prismaSchema += `  url = "${voyagerconfig.url}"
 `;
   prismaSchema += `}
-  
+
 `;
 
-  for (const model of jsonSchema.models) {
+  for (const model of voyagerconfig.models) {
     prismaSchema += `model ${model.name} {
 `;
 
@@ -35,12 +33,9 @@ function generatePrismaSchema(jsonSchema: JsonSchema): string {
   return prismaSchema;
 }
 
-const jsonSchema = {
-  models: [
-    user,
-    post
-  ],
-};
-
-const prismaSchema = generatePrismaSchema(jsonSchema);
+const prismaSchema = generatePrismaSchema(voyagerconfig);
 writeFileSync('prisma/schema.prisma', prismaSchema);
+
+function generateRestApiRoutes(voyagerconfig: VoyagerConfig): void {
+
+}

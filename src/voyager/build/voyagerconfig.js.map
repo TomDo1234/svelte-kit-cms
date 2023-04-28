@@ -1,1 +1,1 @@
-{"version":3,"file":"voyagerconfig.js","sourceRoot":"","sources":["../voyagerconfig.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,GAAkB;IAC1B,QAAQ,EAAE,YAAY;IACtB,GAAG,EAAE,MAAM;CACd,CAAA;AAED,eAAe,MAAM,CAAC"}
+{"version":3,"file":"voyagerconfig.js","sourceRoot":"","sources":["../voyagerconfig.ts"],"names":[],"mappings":"AAAA,OAAO,IAAI,MAAM,eAAe,CAAC;AACjC,OAAO,IAAI,MAAM,eAAe,CAAC;AAEjC,MAAM,aAAa,GAAkB;IACjC,QAAQ,EAAE,YAAY;IACtB,GAAG,EAAE,MAAM;IACX,MAAM,EAAE;QACN,IAAI;QACJ,IAAI;KACL;CACJ,CAAA;AAED,eAAe,aAAa,CAAC"}

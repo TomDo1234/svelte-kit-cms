@@ -2,7 +2,7 @@ datasource db {
   provider = "postgresql"
   url = "test"
 }
-  
+
 model User {
   id Int @id
   name String
