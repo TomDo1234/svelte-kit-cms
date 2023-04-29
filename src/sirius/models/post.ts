@@ -1,5 +1,5 @@
 
-const post: TableConfig = {
+const post: Model = {
   name: 'Post',
   fields: [
     {

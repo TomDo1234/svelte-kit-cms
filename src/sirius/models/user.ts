@@ -1,4 +1,4 @@
-const user: TableConfig = {
+const user: Model = {
   name: 'User',
   fields: [
     {
