@@ -1,5 +1,6 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import siriusconfig from './siriusconfig';
+import path from "path";
 function generatePrismaSchema(siriusconfig) {
     let prismaSchema = '';
     prismaSchema += `datasource db {
@@ -25,7 +26,12 @@ function generatePrismaSchema(siriusconfig) {
     return prismaSchema;
 }
 const prismaSchema = generatePrismaSchema(siriusconfig);
-writeFileSync('prisma/schema.prisma', prismaSchema);
+const folderPath = 'prisma';
+const filePath = path.join(folderPath, 'schema.prisma');
+if (!existsSync(folderPath)) {
+    mkdirSync(folderPath, { recursive: true });
+}
+writeFileSync(filePath, prismaSchema);
 function generateRestApiRoutes(siriusconfig) {
 }
 //# sourceMappingURL=test.js.map
