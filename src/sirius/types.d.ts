@@ -23,11 +23,6 @@ type FieldWithUpdatedAt = FieldBase & {
 }
 
 type Field = FieldWithType | FieldWithCreatedAt | FieldWithUpdatedAt;
-
-type TableConfig = {
-    name: string
-    fields: Field[]
-}
   
 type Model = {
     name: string,

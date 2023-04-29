@@ -3,7 +3,7 @@ import user from "./models/user";
 
 const siriusconfig: SiriusConfig = {
     provider: "postgresql",
-    url: "test",
+    url: "postgresql://postgres:mysecretpassword@localhost:5432/mydatabase",
     models: [
       user,
       post

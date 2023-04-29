@@ -7,6 +7,14 @@ import path from "path";
 function generatePrismaSchema(siriusconfig: SiriusConfig): string {
   let prismaSchema = '';
 
+  prismaSchema += `generator client {
+`;
+    prismaSchema += `  provider = "prisma-client-js"
+`;
+    prismaSchema += `}
+  
+`;
+
   prismaSchema += `datasource db {
 `;
   prismaSchema += `  provider = "${siriusconfig.provider}"
@@ -45,5 +53,74 @@ if (!existsSync(folderPath)) {
 writeFileSync(filePath, prismaSchema);
 
 function generateRestApiRoutes(siriusconfig: SiriusConfig): void {
+  for (const model of siriusconfig.models) {
+    const folderPath = `src/routes/api/${model.name.toLowerCase()}`;
+    if (!existsSync(folderPath)) {
+      mkdirSync(folderPath, { recursive: true });
+    }
 
+    const multiple_file = `
+import { PrismaClient, type ${model.name} } from '@prisma/client';
+import type { RequestEvent } from '@sveltejs/kit';
+
+export async function POST({request}: RequestEvent) {
+  const { items }: {items: ${model.name}[]} = await request.json();
+
+  try {
+    const prisma = new PrismaClient();
+    const query = await prisma.${model.name.toLowerCase()}.createMany({
+      data: items
+    });
+
+    return {
+      status: 200,
+      body: { query },
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      body: { message: 'Error creating posts, ' + error },
+    };
+  }
 }
+`;
+
+    writeFileSync(`${folderPath}/+server.ts`,multiple_file);
+
+    const singleFolderPath = `src/routes/api/${model.name.toLowerCase()}/single`;
+    if (!existsSync(singleFolderPath)) {
+      mkdirSync(singleFolderPath, { recursive: true });
+    }
+
+    const single_file = `
+import { PrismaClient, type ${model.name} } from '@prisma/client';
+import type { RequestEvent } from '@sveltejs/kit';
+
+export async function POST({request}: RequestEvent) {
+  const model: ${model.name} = await request.json();
+
+  try {
+    const prisma = new PrismaClient();
+    const query = await prisma.${model.name.toLowerCase()}.create({
+      data: model
+    });
+
+    return {
+      status: 200,
+      body: { query },
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      body: { message: 'Error creating posts, ' + error },
+    };
+  }
+}
+`;
+
+    writeFileSync(`${singleFolderPath}/+server.ts`,single_file);
+
+  }
+}
+
+generateRestApiRoutes(siriusconfig)
