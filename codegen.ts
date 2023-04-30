@@ -1,13 +1,6 @@
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from "path";
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const rootDir = join(__dirname, '../');
-
-const siriusconfig = (await import(`${rootDir}build/siriusconfig`)).default;
+import siriusconfig from './src/sirius/siriusconfig';
 
 function generatePrismaSchema(siriusconfig: SiriusConfig): string {
   let prismaSchema = '';
