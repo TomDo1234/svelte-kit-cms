@@ -12,7 +12,7 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"siriustest": "tsc -p ./src/sirius/tsconfig.json && node --experimental-specifier-resolution=node ./src/sirius/build/codegen.js",
-		"svelte-kit-sirius": "tsc -p ./tsconfig.json && node --experimental-specifier-resolution=node ./codegen.js && cp -r ./src ../../../",
+		"svelte-kit-sirius": "tsc -p ./tsconfig.json && node --experimental-specifier-resolution=node ./codegen.js && cp -r ./src ../../../ && cp -r ./prisma ../../../",
 		"prepublishOnly": "ncp src/sirius/tsconfig.json ./tsconfig.json",
 		"postpublish": "rimraf tsconfig.json"
 	},
