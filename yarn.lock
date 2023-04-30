@@ -301,10 +301,10 @@
     svelte-hmr "^0.15.1"
     vitefu "^0.2.4"
 
-"@tomdo1234/svelte-kit-cms@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@tomdo1234/svelte-kit-cms/-/svelte-kit-cms-0.0.2.tgz#9bf207278b355d39a223df745cc5ade029d51b99"
-  integrity sha512-mod9gXmb10dvlaN8xqQjQqzuEL0l0QYLabFy4JwrCG24zk/ok53b0RI/UEaK1rR9xPBf6cbX45Z5C6l2QBRlHQ==
+"@tomdo1234/svelte-kit-cms@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@tomdo1234/svelte-kit-cms/-/svelte-kit-cms-0.0.8.tgz#0f9579ec1760d88fed4906a7895ea85d6b2ed8cb"
+  integrity sha512-R67/TXdAY/CZVk6lv74gmTROVlilbGR64mq9q0myeVL5RvJjk66lkRxETUUXgvTgrt7swBuaCjZxiPmhhJXPGA==
   dependencies:
     "@prisma/client" "^4.13.0"
 

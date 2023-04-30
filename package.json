@@ -1,6 +1,6 @@
 {
 	"name": "@tomdo1234/svelte-kit-cms",
-	"version": "0.0.3",
+	"version": "0.0.9",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -12,9 +12,9 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"siriustest": "tsc -p ./src/sirius/tsconfig.json && node --experimental-specifier-resolution=node ./src/sirius/build/codegen.js",
-		"svelte-kit-sirius": "tsc -p ./node_modules/@tomdo1234/svelte-kit-cms/tsconfig.json && node --experimental-specifier-resolution=node ./node_modules/@tomdo1234/svelte-kit-cms/codegen.js",
-		"prepublishOnly": "ncp ./codegen.ts ./codegen.ts && ncp src/sirius/tsconfig.json ./tsconfig.json && ncp ./types.d.ts ./types.d.ts",
-		"postpublish": "rimraf codegen.ts tsconfig.json types.d.ts"
+		"svelte-kit-sirius": "tsc -p ./tsconfig.json && node --experimental-specifier-resolution=node ./codegen.js",
+		"prepublishOnly": "ncp src/sirius/tsconfig.json ./tsconfig.json",
+		"postpublish": "rimraf tsconfig.json"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
