@@ -13,5 +13,10 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true
-	}
+	},
+	"files": [
+		"siriusconfig.ts",
+		"codegen.ts",
+		"types.d.ts"
+	]
 }
