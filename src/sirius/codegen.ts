@@ -1,8 +1,13 @@
-import { writeFileSync,existsSync,mkdirSync } from 'fs';
-import siriusconfig from './siriusconfig';
+import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from "path";
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const rootDir = join(__dirname, '../');
 
+const siriusconfig = (await import(`${rootDir}build/siriusconfig`)).default;
 
 function generatePrismaSchema(siriusconfig: SiriusConfig): string {
   let prismaSchema = '';
@@ -30,7 +35,7 @@ function generatePrismaSchema(siriusconfig: SiriusConfig): string {
 `;
 
     for (const field of model.fields) {
-      prismaSchema += `  ${field.name} ${(field?.isCreatedAt || field?.isUpdatedAt) ? 'DateTime' : field.type}${field?.id ? ' @id @default(autoincrement())' : ''}${field?.unique ? ' @unique': ''}${field?.isCreatedAt ? ' @default(now())': ''}${field?.isUpdatedAt ? ' @updatedAt': ''}
+      prismaSchema += `  ${field.name} ${(field?.isCreatedAt || field?.isUpdatedAt) ? 'DateTime' : field.type}${field?.id ? ' @id @default(autoincrement())' : ''}${field?.unique ? ' @unique' : ''}${field?.isCreatedAt ? ' @default(now())' : ''}${field?.isUpdatedAt ? ' @updatedAt' : ''}
 `;
     }
 
@@ -94,7 +99,7 @@ export async function GET({request}: RequestEvent) {
 }
 `;
 
-    writeFileSync(`${folderPath}/+server.ts`,multiple_file);
+    writeFileSync(`${folderPath}/+server.ts`, multiple_file);
 
     const singleFolderPath = `src/routes/api/${model.name.toLowerCase()}/single`;
     if (!existsSync(singleFolderPath)) {
@@ -121,7 +126,7 @@ export async function POST({request}: RequestEvent) {
 }
 `;
 
-    writeFileSync(`${singleFolderPath}/+server.ts`,single_file);
+    writeFileSync(`${singleFolderPath}/+server.ts`, single_file);
 
   }
 }
