@@ -30,7 +30,7 @@ function generatePrismaSchema(siriusconfig: SiriusConfig): string {
 `;
 
     for (const field of model.fields) {
-      prismaSchema += `  ${field.name} ${(field?.isCreatedAt || field?.isUpdatedAt) ? 'DateTime' : field.type}${field?.id ? ' @id' : ''}${field?.unique ? ' @unique': ''}${field?.isCreatedAt ? ' @default(now())': ''}${field?.isUpdatedAt ? ' @updatedAt': ''}
+      prismaSchema += `  ${field.name} ${(field?.isCreatedAt || field?.isUpdatedAt) ? 'DateTime' : field.type}${field?.id ? ' @id @default(autoincrement())' : ''}${field?.unique ? ' @unique': ''}${field?.isCreatedAt ? ' @default(now())': ''}${field?.isUpdatedAt ? ' @updatedAt': ''}
 `;
     }
 
@@ -61,7 +61,7 @@ function generateRestApiRoutes(siriusconfig: SiriusConfig): void {
 
     const multiple_file = `
 import { PrismaClient, type ${model.name} } from '@prisma/client';
-import type { RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const { items }: {items: ${model.name}[]} = await request.json();
@@ -72,15 +72,15 @@ export async function POST({request}: RequestEvent) {
       data: items
     });
 
-    return {
+    return json({
       status: 200,
       body: { query },
-    };
+    });
   } catch (error) {
-    return {
+    return json({
       status: 500,
       body: { message: 'Error creating ${model.name}, ' + error },
-    };
+    });
   }
 }
 
@@ -93,15 +93,15 @@ export async function GET({request}: RequestEvent) {
       where: where_query
     });
 
-    return {
+    return json({
       status: 200,
       body: { query },
-    };
+    });
   } catch (error) {
-    return {
+    return json({
       status: 500,
       body: { message: 'Error finding ${model.name}, ' + error },
-    };
+    });
   }
 }
 `;
@@ -115,7 +115,7 @@ export async function GET({request}: RequestEvent) {
 
     const single_file = `
 import { PrismaClient, type ${model.name} } from '@prisma/client';
-import type { RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const model: ${model.name} = await request.json();
@@ -126,15 +126,15 @@ export async function POST({request}: RequestEvent) {
       data: model
     });
 
-    return {
+    return json({
       status: 200,
       body: { query },
-    };
+    });
   } catch (error) {
-    return {
+    return json({
       status: 500,
       body: { message: 'Error creating ${model.name}, ' + error },
-    };
+    });
   }
 }
 `;

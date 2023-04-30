@@ -1,6 +1,6 @@
 
 import { PrismaClient, type Post } from '@prisma/client';
-import type { RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const model: Post = await request.json();
@@ -11,14 +11,14 @@ export async function POST({request}: RequestEvent) {
       data: model
     });
 
-    return {
+    return json({
       status: 200,
       body: { query },
-    };
+    });
   } catch (error) {
-    return {
+    return json({
       status: 500,
       body: { message: 'Error creating Post, ' + error },
-    };
+    });
   }
 }
