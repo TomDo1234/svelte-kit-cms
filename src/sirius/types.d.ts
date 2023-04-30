@@ -5,7 +5,7 @@ type FieldBase = {
 }
 
 type FieldWithType = FieldBase & {
-    type: "Int" | "String" | "DateTime" | "Boolean" | "Float" | "Enum" | "Decimal" | "BigInt" | "Bytes",
+    type: "Int" | "String" | "DateTime" | "Boolean" | "Float" | "Decimal" | "BigInt" | "Bytes",
     isCreatedAt?: false,
     isUpdatedAt?: false,
 }
