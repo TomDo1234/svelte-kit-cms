@@ -15,7 +15,7 @@
 		"strict": true
 	},
 	"files": [
-		"siriusconfig.ts",
+		"../../src/sirius/siriusconfig.ts",
 		"codegen.ts",
 		"types.d.ts"
 	]
