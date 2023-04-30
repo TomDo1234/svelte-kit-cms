@@ -1,6 +1,6 @@
 
 import { PrismaClient, type User } from '@prisma/client';
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent,error } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const model: User = await request.json();
@@ -11,14 +11,8 @@ export async function POST({request}: RequestEvent) {
       data: model
     });
 
-    return json({
-      status: 200,
-      body: { query },
-    });
-  } catch (error) {
-    return json({
-      status: 500,
-      body: { message: 'Error creating User, ' + error },
-    });
+    return json({ query })
+  } catch (errormsg) {
+    throw error(400,{message: 'Error creating User, ' + errormsg })
   }
 }

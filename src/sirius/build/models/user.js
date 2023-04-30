@@ -13,6 +13,7 @@ const user = {
         {
             name: 'email',
             type: 'String',
+            unique: true
         },
     ],
 };

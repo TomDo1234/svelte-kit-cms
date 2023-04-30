@@ -61,7 +61,7 @@ function generateRestApiRoutes(siriusconfig: SiriusConfig): void {
 
     const multiple_file = `
 import { PrismaClient, type ${model.name} } from '@prisma/client';
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent,error } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const { items }: {items: ${model.name}[]} = await request.json();
@@ -72,15 +72,9 @@ export async function POST({request}: RequestEvent) {
       data: items
     });
 
-    return json({
-      status: 200,
-      body: { query },
-    });
-  } catch (error) {
-    return json({
-      status: 500,
-      body: { message: 'Error creating ${model.name}, ' + error },
-    });
+    return json({ query })
+  } catch (errormsg) {
+    throw error(400,{message: 'Error creating ${model.name}, ' + errormsg })
   }
 }
 
@@ -93,15 +87,9 @@ export async function GET({request}: RequestEvent) {
       where: where_query
     });
 
-    return json({
-      status: 200,
-      body: { query },
-    });
-  } catch (error) {
-    return json({
-      status: 500,
-      body: { message: 'Error finding ${model.name}, ' + error },
-    });
+    return json({ query })
+  } catch (errormsg) {
+    throw error(400,{message: 'Error finding ${model.name}, ' + errormsg })
   }
 }
 `;
@@ -115,7 +103,7 @@ export async function GET({request}: RequestEvent) {
 
     const single_file = `
 import { PrismaClient, type ${model.name} } from '@prisma/client';
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent,error } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const model: ${model.name} = await request.json();
@@ -126,15 +114,9 @@ export async function POST({request}: RequestEvent) {
       data: model
     });
 
-    return json({
-      status: 200,
-      body: { query },
-    });
-  } catch (error) {
-    return json({
-      status: 500,
-      body: { message: 'Error creating ${model.name}, ' + error },
-    });
+    return json({ query })
+  } catch (errormsg) {
+    throw error(400,{message: 'Error creating ${model.name}, ' + errormsg })
   }
 }
 `;
