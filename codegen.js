@@ -1,6 +1,6 @@
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from "path";
-import siriusconfig from './src/sirius/siriusconfig';
+import siriusconfig from './siriusconfig';
 function generatePrismaSchema(siriusconfig) {
     let prismaSchema = '';
     prismaSchema += `generator client {
