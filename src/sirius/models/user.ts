@@ -13,6 +13,7 @@ const user: Model = {
     {
       name: 'email',
       type: 'String',
+      unique: true
     },
   ],
 };
