@@ -18,7 +18,7 @@ export async function POST({request}: RequestEvent) {
   } catch (error) {
     return {
       status: 500,
-      body: { message: 'Error creating posts, ' + error },
+      body: { message: 'Error creating User, ' + error },
     };
   }
 }

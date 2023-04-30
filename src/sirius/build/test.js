@@ -65,7 +65,28 @@ export async function POST({request}: RequestEvent) {
   } catch (error) {
     return {
       status: 500,
-      body: { message: 'Error creating posts, ' + error },
+      body: { message: 'Error creating ${model.name}, ' + error },
+    };
+  }
+}
+
+export async function GET({request}: RequestEvent) {
+  const where_query: ${model.name} = await request.json();
+
+  try {
+    const prisma = new PrismaClient();
+    const query = await prisma.${model.name.toLowerCase()}.findMany({
+      where: where_query
+    });
+
+    return {
+      status: 200,
+      body: { query },
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      body: { message: 'Error finding ${model.name}, ' + error },
     };
   }
 }
@@ -95,7 +116,7 @@ export async function POST({request}: RequestEvent) {
   } catch (error) {
     return {
       status: 500,
-      body: { message: 'Error creating posts, ' + error },
+      body: { message: 'Error creating ${model.name}, ' + error },
     };
   }
 }
