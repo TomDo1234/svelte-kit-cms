@@ -9,9 +9,9 @@ function generatePrismaSchema(siriusconfig: SiriusConfig): string {
 
   prismaSchema += `generator client {
 `;
-    prismaSchema += `  provider = "prisma-client-js"
+  prismaSchema += `  provider = "prisma-client-js"
 `;
-    prismaSchema += `}
+  prismaSchema += `}
   
 `;
 
