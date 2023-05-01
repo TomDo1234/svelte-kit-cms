@@ -10,7 +10,7 @@ buildSync({
     format: 'esm',
     outdir: __dirname
 });
-import siriusconfig from "./siriusconfig.js";
+const siriusconfig = (await import(__dirname + "/siriusconfig.js")).default
 function generatePrismaSchema(siriusconfig) {
     let prismaSchema = '';
     prismaSchema += `generator client {

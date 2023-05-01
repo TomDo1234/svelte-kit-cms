@@ -15,7 +15,7 @@ buildSync({
 })
 
 
-import siriusconfig from "./siriusconfig.js";
+const siriusconfig = (await import(__dirname + "/siriusconfig.js")).default
 
 function generatePrismaSchema(siriusconfig: SiriusConfig): string {
   let prismaSchema = '';
