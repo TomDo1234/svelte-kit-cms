@@ -1,6 +1,7 @@
 import post from "./models/post";
 import user from "./models/user";
 import copy from './models/copy';
+import type { SiriusConfig } from "@tomdo1234/svelte-kit-cms";
 
 const siriusconfig: SiriusConfig = {
     provider: "postgresql",

@@ -19,6 +19,7 @@
 	"bin": {
 		"siriusgenerate": "./codegen.js"
 	},
+	"types": "types.d.ts",
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
