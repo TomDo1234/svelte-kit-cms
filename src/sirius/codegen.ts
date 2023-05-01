@@ -1,6 +1,20 @@
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from "path";
-import siriusconfig from './siriusconfig';
+
+import { buildSync } from 'esbuild';
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+buildSync({
+  entryPoints: [path.resolve(__dirname, '../../../src/sirius/siriusconfig.ts')],
+  bundle: true,
+  write: true,
+  format: 'esm',
+  outdir: __dirname
+})
+
+
+import siriusconfig from "./siriusconfig";
 
 function generatePrismaSchema(siriusconfig: SiriusConfig): string {
   let prismaSchema = '';

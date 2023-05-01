@@ -6,7 +6,7 @@
 		"module": "ESNext",
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
-		"outDir": "./",
+		"outDir": "./build",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
@@ -15,7 +15,7 @@
 		"strict": true
 	},
 	"files": [
-		"../../../src/sirius/siriusconfig.ts",
-		"types.d.ts"
+		"types.d.ts",
+		"codegen.ts"
 	]
 }
