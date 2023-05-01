@@ -9,7 +9,7 @@ const siriusconfig: SiriusConfig = {
     models: [
       user,
       post,
-      copy
+      copy,
     ],
 }
 
