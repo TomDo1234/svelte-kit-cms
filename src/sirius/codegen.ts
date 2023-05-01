@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from "path";
 
@@ -14,7 +15,7 @@ buildSync({
 })
 
 
-import siriusconfig from "./siriusconfig";
+import siriusconfig from "./siriusconfig.js";
 
 function generatePrismaSchema(siriusconfig: SiriusConfig): string {
   let prismaSchema = '';
