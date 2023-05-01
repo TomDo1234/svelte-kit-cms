@@ -1,7 +1,6 @@
 {
-	"name": "svelte-kit-cms",
-	"version": "0.0.1",
-	"private": true,
+	"name": "@tomdo1234/svelte-kit-cms",
+	"version": "0.0.14",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -12,7 +11,13 @@
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"siriustest": "tsc -p ./src/sirius/tsconfig.json && node --experimental-specifier-resolution=node ./src/sirius/build/codegen.js"
+		"siriustest": "tsc -p ./src/sirius/tsconfig.json && node --experimental-specifier-resolution=node ./src/sirius/build/codegen.js",
+		"svelte-kit-sirius": "tsc -p ./tsconfig.json && node --experimental-specifier-resolution=node ./codegen.js && cp -r ./src ../../../ && cp -r ./prisma ../../../",
+		"prepublishOnly": "ncp src/sirius/types.d.ts ./types.d.ts && ncp src/sirius/codegen.js ./codegen.js && ncp src/sirius/tsconfig.json ./tsconfig.json",
+		"postpublish": "rimraf tsconfig.json types.d.ts codegen.js"
+	},
+	"bin": {
+		"siriusgenerate": "./codegen.js"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
@@ -24,10 +29,12 @@
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.26.0",
+		"ncp": "^2.0.0",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"prisma": "^4.13.0",
+		"rimraf": "^5.0.0",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
 		"tailwindcss": "^3.3.2",

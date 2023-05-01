@@ -6,12 +6,16 @@
 		"module": "ESNext",
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
-		"outDir": "build",
+		"outDir": "./build",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true
-	}
+	},
+	"files": [
+		"types.d.ts",
+		"codegen.ts"
+	]
 }

@@ -22,3 +22,12 @@ model Post {
   updatedAt DateTime @updatedAt
 }
 
+model Copy {
+  id Int @id @default(autoincrement())
+  title String @unique
+  content222 String
+  authorId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

@@ -1,0 +1,6 @@
+# Ignore everything
+**
+# Except the required files
+!/codegen.js
+!/tsconfig.json
+!/types.d.ts

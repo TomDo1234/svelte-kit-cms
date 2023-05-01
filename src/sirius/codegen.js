@@ -1,6 +1,15 @@
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
-import siriusconfig from './siriusconfig';
 import path from "path";
+import { buildSync } from 'esbuild';
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+buildSync({
+    entryPoints: [path.resolve(__dirname, '../../../src/sirius/siriusconfig.ts')],
+    bundle: true,
+    write: true,
+    format: 'esm',
+    outdir: __dirname
+});
+import siriusconfig from "./siriusconfig";
 function generatePrismaSchema(siriusconfig) {
     let prismaSchema = '';
     prismaSchema += `generator client {
@@ -23,7 +32,7 @@ function generatePrismaSchema(siriusconfig) {
         prismaSchema += `model ${model.name} {
 `;
         for (const field of model.fields) {
-            prismaSchema += `  ${field.name} ${(field?.isCreatedAt || field?.isUpdatedAt) ? 'DateTime' : field.type}${field?.id ? ' @id' : ''}${field?.unique ? ' @unique' : ''}${field?.isCreatedAt ? ' @default(now())' : ''}${field?.isUpdatedAt ? ' @updatedAt' : ''}
+            prismaSchema += `  ${field.name} ${(field?.isCreatedAt || field?.isUpdatedAt) ? 'DateTime' : field.type}${field?.id ? ' @id @default(autoincrement())' : ''}${field?.unique ? ' @unique' : ''}${field?.isCreatedAt ? ' @default(now())' : ''}${field?.isUpdatedAt ? ' @updatedAt' : ''}
 `;
         }
         prismaSchema += `}
@@ -47,7 +56,7 @@ function generateRestApiRoutes(siriusconfig) {
         }
         const multiple_file = `
 import { PrismaClient, type ${model.name} } from '@prisma/client';
-import type { RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent,error } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const { items }: {items: ${model.name}[]} = await request.json();
@@ -58,15 +67,9 @@ export async function POST({request}: RequestEvent) {
       data: items
     });
 
-    return {
-      status: 200,
-      body: { query },
-    };
-  } catch (error) {
-    return {
-      status: 500,
-      body: { message: 'Error creating ${model.name}, ' + error },
-    };
+    return json({ query })
+  } catch (errormsg) {
+    throw error(400,{message: 'Error creating ${model.name}, ' + errormsg })
   }
 }
 
@@ -79,15 +82,9 @@ export async function GET({request}: RequestEvent) {
       where: where_query
     });
 
-    return {
-      status: 200,
-      body: { query },
-    };
-  } catch (error) {
-    return {
-      status: 500,
-      body: { message: 'Error finding ${model.name}, ' + error },
-    };
+    return json({ query })
+  } catch (errormsg) {
+    throw error(400,{message: 'Error finding ${model.name}, ' + errormsg })
   }
 }
 `;
@@ -98,7 +95,7 @@ export async function GET({request}: RequestEvent) {
         }
         const single_file = `
 import { PrismaClient, type ${model.name} } from '@prisma/client';
-import type { RequestEvent } from '@sveltejs/kit';
+import { json, type RequestEvent,error } from '@sveltejs/kit';
 
 export async function POST({request}: RequestEvent) {
   const model: ${model.name} = await request.json();
@@ -109,15 +106,9 @@ export async function POST({request}: RequestEvent) {
       data: model
     });
 
-    return {
-      status: 200,
-      body: { query },
-    };
-  } catch (error) {
-    return {
-      status: 500,
-      body: { message: 'Error creating ${model.name}, ' + error },
-    };
+    return json({ query })
+  } catch (errormsg) {
+    throw error(400,{message: 'Error creating ${model.name}, ' + errormsg })
   }
 }
 `;
@@ -125,4 +116,4 @@ export async function POST({request}: RequestEvent) {
     }
 }
 generateRestApiRoutes(siriusconfig);
-//# sourceMappingURL=test.js.map
+//# sourceMappingURL=codegen.js.map
