@@ -1,6 +1,6 @@
 {
 	"name": "@tomdo1234/svelte-kit-cms",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -46,7 +46,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@lucia-auth/adapter-prisma": "^2.0.0",
 		"@prisma/client": "^4.13.0",
-		"esbuild": "^0.17.18"
+		"esbuild": "^0.17.18",
+		"lucia-auth": "^1.5.0"
 	}
 }
