@@ -7,12 +7,6 @@ datasource db {
   url      = "postgresql://postgres:mysecretpassword@localhost:5432/mydatabase"
 }
 
-model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
-}
-
 model Post {
   id        Int      @id @default(autoincrement())
   title     String   @unique
@@ -62,5 +56,5 @@ model AuthUser {
   email        String        @unique
   password     String
 
-  @@map("auth_user")
+  @@map("User")
 }

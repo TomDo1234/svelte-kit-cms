@@ -27,6 +27,7 @@ export type Field = FieldWithType | FieldWithCreatedAt | FieldWithUpdatedAt;
 export type Model = {
     name: string,
     fields: Field[]
+    auth_model?: boolean
 }
 
 export type SiriusConfig = {
