@@ -1,6 +1,6 @@
 {
 	"name": "@tomdo1234/svelte-kit-cms",
-	"version": "0.0.18",
+	"version": "0.0.19",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -24,7 +24,6 @@
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
-		"@tomdo1234/svelte-kit-cms": "^0.0.18",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
@@ -47,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^4.13.0"
+		"@prisma/client": "^4.13.0",
+		"esbuild": "^0.17.18"
 	}
 }
