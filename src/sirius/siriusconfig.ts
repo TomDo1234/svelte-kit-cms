@@ -1,6 +1,7 @@
 import post from "./models/post";
 import user from "./models/user";
 import copy from './models/copy';
+import type { SiriusConfig } from "./types";
 
 const siriusconfig: SiriusConfig = {
     provider: "postgresql",
@@ -8,7 +9,7 @@ const siriusconfig: SiriusConfig = {
     models: [
       user,
       post,
-      copy
+      copy,
     ],
 }
 

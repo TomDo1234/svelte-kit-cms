@@ -1,38 +1,76 @@
-# create-svelte
+# svelte-kit-cms
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is a CMS I am working on for sveltekit, simply define a json config and the prisma code will be automatically generated for you + endpoints.
 
-## Creating a project
+## Creating the Config
 
-If you're seeing this, you've probably already done this step. Congrats!
+create a siriusconfig.ts file in src/sirius of your sveltekit project, if you dont have the folder create it.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+the types are exported (SiriusConfig type) from the package so make sure you export it to get type hinting and the structure
 
-# create a new project in my-app
-npm create svelte@latest my-app
+## Example Config
+
+```ts
+import post from "./models/post";
+import user from "./models/user";
+import copy from './models/copy';
+import type { SiriusConfig } from "@tomdo1234/svelte-kit-cms";
+
+const siriusconfig: SiriusConfig = {
+    provider: "postgresql",
+    url: "postgresql://postgres:mysecretpassword@localhost:5432/mydatabase",
+    models: [
+      user,
+      post,
+      copy,
+    ],
+}
+
+export default siriusconfig;
 ```
 
-## Developing
+provider: string is the db provider used for prisma
+url: url string
+models: is an array of models
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Example Model
 
-```bash
-npm run dev
+```ts
+import { Model } from "@tomdo1234/svelte-kit-cms";
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+const user: Model = {
+    name: 'User',
+    fields: [
+      {
+        name: 'id',
+        type: 'Int',
+        id: true
+      },
+      {
+        name: 'name',
+        type: 'String',
+      },
+      {
+        name: 'email',
+        type: 'String',
+        unique: true
+      },
+    ],
+  };
+  
+  export default user;
 ```
 
-## Building
+each model has a name: property (name of model in prisma)
+fields is an array of the Field type which has a name of the column, its type and that is about it at the moment besides other special properties like id, unique 
+and createdAt and updatedAt
 
-To create a production version of your app:
+## Generating the Code and Routes
+
+after making your siriusconfig.ts, run 
 
 ```bash
-npm run build
+npx siriusgenerate
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+and the prisma schema file + endpoitns and routes for your sveltekit app will be generated

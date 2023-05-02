@@ -22,14 +22,15 @@ type FieldWithUpdatedAt = FieldBase & {
     type?: never,
 }
 
-type Field = FieldWithType | FieldWithCreatedAt | FieldWithUpdatedAt;
+export type Field = FieldWithType | FieldWithCreatedAt | FieldWithUpdatedAt;
   
-type Model = {
+export type Model = {
     name: string,
     fields: Field[]
+    auth_model?: boolean
 }
 
-type SiriusConfig = {
+export type SiriusConfig = {
     provider: string,
     url: string,
     models: Model[]

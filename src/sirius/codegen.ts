@@ -3,6 +3,7 @@ import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from "path";
 
 import { buildSync } from 'esbuild';
+import { SiriusConfig } from './types';
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
