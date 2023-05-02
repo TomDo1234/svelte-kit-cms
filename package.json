@@ -1,6 +1,6 @@
 {
 	"name": "@tomdo1234/svelte-kit-cms",
-	"version": "0.0.20",
+	"version": "0.0.21",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -19,6 +19,7 @@
 	"bin": {
 		"siriusgenerate": "./codegen.js"
 	},
+	"license": "MIT",
 	"types": "types.d.ts",
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
